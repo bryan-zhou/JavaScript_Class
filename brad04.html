@@ -1,0 +1,41 @@
+<script>
+    function doCal() {
+        let x = document.getElementById("x").value;
+        let y = document.getElementById("y").value;
+        let op = document.getElementById("op").value;
+        let result = document.getElementById("result");
+
+        x = parseInt(x);
+        y = parseInt(y);
+
+        switch (op) {
+            case '+':
+                result.innerHTML = x+y;
+                break;
+
+            case '-':
+            result.innerHTML = x-y;
+                break;
+
+            case '*':
+            result.innerHTML = x*y;
+                break;
+
+            case '/':
+            result.innerHTML = parseInt(x/y) + '......' + x%y;
+                break;
+
+        }
+    }
+</script>
+<input type="number" name="x" id="x">
+<select name="" id="op">
+    <option value="+">+</option>
+    <option value="-">-</option>
+    <option value="*">*</option>
+    <option value="/">/</option>
+</select>
+<input type="number" id="y">
+
+<input type="button" value="=" onclick="doCal()">
+<span id="result">Answer</span>
