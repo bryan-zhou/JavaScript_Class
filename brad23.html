@@ -1,0 +1,16 @@
+<script src="bradapis.js"></script>
+<script>
+    
+    function ckId(){
+        let id = document.getElementById('id').value;
+        let isRight = checkTWId(id);
+        if (!isRight){
+            alert('XX');
+        }else{
+            alert('OK');
+        }
+    }
+</script>
+
+<input type="text" id="id" />
+<input type="button" onclick="ckId()" value='Check'/>

@@ -1,0 +1,47 @@
+<script src="bradapis.js"></script>
+<script>
+    let answer = createAnswer(3);
+    let log = '';
+    let count = 0;
+
+    function doGuess() {
+        count++;
+        let guess = document.getElementById('guess');
+        let result = checkAB(answer, guess.value);
+        log += count + ': ' + guess.value + ' => ' + result + '<br>';
+        document.getElementById('log').innerHTML = log;
+
+        if (result == 3 + 'A0B') {
+            alert('Winner!');
+            reset();
+        } else if (count == 3) {
+            alert('Lose, Answer = ' + answer);
+            reset();
+        } else {
+            alert(result);
+        }
+
+        guess.value = '';
+        guess.focus();
+    }
+
+    function reset() {
+        if (!confirm('Reset?')) {
+            return;
+        }
+        log = '';
+        answer = createAnswer(3);
+        document.getElementById('log').innerHTML = log;
+        document.getElementById('guess').innerHTML = '';
+        document.getElementById('guess').focus();
+        count = 0;
+    }
+</script>
+
+<h1>Guess Number Game</h1>
+<hr>
+<input type="number" id="guess">
+<input type="button" value="Guess" onclick="doGuess()">
+<input type="button" value="Reset" onclick="reset()">
+<hr>
+<div id="log"></div>
