@@ -1,0 +1,24 @@
+<script src="bradapis.js"></script>
+
+<table width="100%" border="1" style="border-collapse: collapse">
+    <script>
+        let n = prompt("plz input a number");
+        let nVal = 1;
+        for (let i = 0; i < n; i++) {
+            document.write("<tr>");
+            for (let j = 0; j < n; j++) {
+
+                if (checkPrime(nVal)) {
+                    document.write("<td style='color:red'>");
+                } else {
+                    document.write("<td>");
+                }
+
+                document.write(nVal);
+                nVal++
+                document.write("</td>");
+            }
+            document.write("</tr>");
+        }
+    </script>
+</table>
