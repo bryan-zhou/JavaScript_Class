@@ -1,0 +1,24 @@
+<script src="bradapis.js"></script>
+
+<h1>身份證字號產生器</h1>
+<input id="generate" type="button" value="產生">
+<input type="button"id="check" value="檢查">
+<br>
+<input type="text"id="id">
+
+<script>
+    document.getElementById("generate").onclick = function() {
+        let newId = generateTWId();
+        document.getElementById("id").value = newId;
+    };
+
+    document.getElementById("check").onclick = function() {
+        let checkValue = document.getElementById("id").value
+        
+        if (checkTWId(checkValue)) {
+            alert("身分證字號驗證成功");
+        } else {
+            alert("身分證字號驗證失敗");
+        }
+    };
+</script>
