@@ -1,17 +1,34 @@
 <script src="bradapis.js"></script>
+
+<h1>Guess Number Game</h1>
+<hr>
+<label for="digit">請輸入數字的位數:</label>
+<input type="number" name="digit" id="digit">
+<br>
+<br>
+<input type="number" id="guess">
+<input type="button" value="Guess" onclick="doGuess()">
+<input type="button" value="Reset" onclick="reset()">
+<hr>
+<div id="log"></div>
+
 <script>
-    let answer = createAnswer(3);
+    let digit = document.getElementById('digit');
+    let answer = createAnswer(parseInt(digit.value));
     let log = '';
     let count = 0;
 
     function doGuess() {
+        if (answer == '') {
+            answer = createAnswer(parseInt(digit.value));
+        }
         count++;
         let guess = document.getElementById('guess');
         let result = checkAB(answer, guess.value);
         log += count + ': ' + guess.value + ' => ' + result + '<br>';
         document.getElementById('log').innerHTML = log;
 
-        if (result == 3 + 'A0B') {
+        if (result == digit.value + 'A0B') {
             alert('Winner!');
             reset();
         } else if (count == 3) {
@@ -30,18 +47,10 @@
             return;
         }
         log = '';
-        answer = createAnswer(3);
+        answer = createAnswer(parseInt(digit.value));
         document.getElementById('log').innerHTML = log;
         document.getElementById('guess').innerHTML = '';
         document.getElementById('guess').focus();
         count = 0;
     }
 </script>
-
-<h1>Guess Number Game</h1>
-<hr>
-<input type="number" id="guess">
-<input type="button" value="Guess" onclick="doGuess()">
-<input type="button" value="Reset" onclick="reset()">
-<hr>
-<div id="log"></div>
