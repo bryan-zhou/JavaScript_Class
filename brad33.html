@@ -1,0 +1,46 @@
+<h1 id="head"></h1>
+<hr>
+<canvas id="canvas" width="480" height="320" style="border: 1px solid black;"></canvas>
+<input type="button" value="Clear" onclick="clearCanvas()">
+<input type="button" onclick='moveBall()' value="Move Ball" />
+<script>
+
+    function clearCanvas() {
+        ctx.clearRect(0,0, canvas.width, canvas.height);
+    }
+
+    head.innerHTML = 'XXX XXX';
+
+    let ctx = canvas.getContext('2d'); // 渲染
+
+    let isDrag = false;
+    canvas.onmouseup = function(e) {
+        isDrag = false;
+    }
+
+    canvas.onmousedown = function(e) {
+        isDrag = true;
+        ctx.strokeStyle = 'rga(0,0,255)';
+        ctx.beginPath();
+        ctx.moveTo(e.offsetX, e.offsetY);
+    }
+
+    canvas.onmousemove = function(e) {
+        if (isDrag) {
+            ctx.lineTo(e.offsetX, e.offsetY);
+            ctx.stroke();
+        }
+    }
+
+    let ball = new Image();
+    ball.src = 'ball.png';
+
+    ball.onload = function() {
+        ctx.drawImage(ball, 50, 50);
+    }
+
+    function moveBall(){
+        ctx.clearRect(240,240,48,48);
+        ctx.drawImage(ball, 0, 0);
+    }
+</script>

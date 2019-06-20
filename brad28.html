@@ -1,0 +1,32 @@
+<script>
+    let body = document.createElement('body');
+    document.body = body;
+
+    let head = document.createElement('h1');
+    // head.innerHTML ="XXX XXX XXX";
+    // document.body.appendChild(head);
+
+    let h1Text = document.createTextNode('Hello, World');
+    head.appendChild(h1Text);
+    document.body.appendChild(head);
+    h1Text.textContent = "Hello, Brad";
+
+    let hr = document.createElement('hr');
+    document.body.appendChild(hr);
+
+    let ul = document.createElement('ul');
+    body.appendChild(ul);
+
+    for (let i = 0; i < 3; i++) {
+        let li = document.createElement('li');
+        li.innerHTML = `第 ${i + 1} 個項目`;
+        ul.appendChild(li);
+    }
+
+    let hr2 = hr.cloneNode();
+    body.appendChild(hr2);
+    
+    
+
+
+</script>

@@ -111,3 +111,17 @@ function checkPrime(num) {
 
     return true
 }
+
+function cloneObject(obj) {
+    if (typeof(obj) != 'object') {
+        return null;
+    }
+    
+    let newObj = new Object();
+
+    for (let attr in obj) {
+        newObj[attr] = obj[attr];
+    }
+
+    return newObj;
+}
