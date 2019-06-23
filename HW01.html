@@ -1,0 +1,176 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<style>
+  table {
+    margin: auto;
+  }
+
+  td {
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .no-border {
+    border: none;
+  }
+
+  .win {
+    background: red;
+    color: white;
+  }
+
+  #money {
+    color: blue;
+  }
+</style>
+
+<body>
+  <br>
+  <div class="container">
+    <table border="1">
+      <tr>
+        <td id="item1" class="win">
+          100
+        </td>
+        <td id="item2">
+          50
+        </td>
+        <td id="item3">
+          200
+        </td>
+        <td id="item4">
+          50
+        </td>
+        <td id="item5">
+          100
+        </td>
+      </tr>
+      <tr>
+        <td id="item16">
+          50
+        </td>
+        <td colspan="3" class="no-border">
+          目前金額: <span id="money">500</span>
+        </td>
+        <td id="item6">
+          50
+        </td>
+      </tr>
+      <tr>
+        <td id="item15">
+          1000
+        </td>
+        <td colspan="3" class="no-border">
+          <button class="btn-lg btn-danger" onclick="startGame()" id="start">開始抽獎!</button>
+        </td>
+        <td id="item7">
+          1000
+        </td>
+      </tr>
+      <tr>
+        <td id="item14">
+          50
+        </td>
+        <td colspan="3" class="no-border">
+          每轉一次200
+        </td>
+        <td id="item8">
+          50
+        </td>
+      </tr>
+      <tr>
+        <td id="item13">
+          100
+        </td>
+        <td id="item12">
+          50
+        </td>
+        <td id="item11">
+          200
+        </td>
+        <td id="item10">
+          50
+        </td>
+        <td id="item9">
+          100
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <script>
+    let money = 500;
+    let itemMap = [
+      100, 50, 200, 50, 100,
+      50, 1000, 50,
+      100, 50, 200, 50, 100,
+      50, 1000, 50
+    ];
+
+    let item = 0;
+    let runTimes = 0;
+    let stopTime = 0;
+    let delay = 1000;
+
+    function init() {
+      runTimes = 0;
+      delay = 1000;
+      item = 0;
+      $("#start").attr("disabled", false);
+    }
+
+    function startGame() {
+      if (money < 200) {
+        alert('金額不足');
+        return;
+      }
+      money -= 200;
+      document.getElementById('money').innerHTML = money;
+      if (runTimes > 0) return;
+      stopTime = Math.floor(Math.random() * (30) + 20);
+      $("#start").attr("disabled", true);
+      runGame();
+    }
+
+    function runGame() {
+      item++;
+      runTimes++;
+
+      // 繞一圈後重頭
+      if (item >= 17) {
+        item = 1;
+      }
+
+      if (runTimes > stopTime) {
+        // 開獎 && 計算 && 按鈕重置
+        let itemIndex = (stopTime % 16 == 0) ? 15 : (stopTime % 16) - 1;
+        let score = itemMap[itemIndex];
+        money += score;
+        document.getElementById('money').innerHTML = money;
+        alert('恭喜得獎:' + score);
+        init();
+      } else if (runTimes + 8 > stopTime) {
+        // 減速
+        $('td').removeClass("win");
+        $("#item" + item).addClass("win");
+        setTimeout(runGame, (delay = delay * 1.5));
+      } else {
+        // 加速
+        $('td').removeClass("win");
+        $("#item" + item).addClass("win");
+        setTimeout(runGame, delay);
+
+        // 極限速度
+        delay = (delay >= 100) ? delay / 2 : 100;
+      }
+    }
+
+  </script>
+
+</body>
